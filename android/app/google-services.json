@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "189763797518",
+    "project_id": "mynotes-4bb3c",
+    "storage_bucket": "mynotes-4bb3c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:189763797518:android:6ac330e3897ee21c75f25f",
+        "android_client_info": {
+          "package_name": "com.makingthingsup.mynotes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDTCWDZUE9OZUiMaJQ5EFwkUMwlYp248rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
