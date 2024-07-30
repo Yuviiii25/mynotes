@@ -12,10 +12,16 @@ class NotesService{
   List<DatabaseNote> _notes = [];
 
   static final NotesService _shared = NotesService._sharedInstance();
-  NotesService._sharedInstance();
+  NotesService._sharedInstance(){
+    _notesStreamController = StreamController<List<DatabaseNote>>.broadcast(
+      onListen: (){
+        _notesStreamController.sink.add(_notes);
+      },
+    );
+  }
   factory NotesService() => _shared;
 
-  final _notesStreamController = StreamController<List<DatabaseNote>>.broadcast();
+  late final  StreamController<List<DatabaseNote>> _notesStreamController;
 
   Stream<List<DatabaseNote>> get allNotes => _notesStreamController.stream;
 
@@ -50,7 +56,7 @@ class NotesService{
     await _ensureDBlsOpen();
     final db = _getDatabaseOrThrow();
     await getNote(id: note.id);
-    final updatesCount = await db.update(noteTable, {textColumn: text, isSynchedWithCloudColumn: 0,});
+    final updatesCount = await db.update(noteTable, {textColumn: text, isSyncedWithCloudColumn: 0,});
     if(updatesCount == 0){
       throw CouldNotUpdateNote();
     }else{
@@ -119,7 +125,7 @@ class NotesService{
     final noteId = await db.insert(noteTable,{
       userIdColumn: owner.id,
       textColumn: text,
-      isSynchedWithCloudColumn: 1,
+      isSyncedWithCloudColumn: 1,
     });
 
     final note = DatabaseNote(id: noteId, userId: owner.id, text: text, isSynchedWithCloud: true);
@@ -235,7 +241,7 @@ class DatabaseNote{
   DatabaseNote.fromRow(Map<String,Object?> map): id = map[idColumn] as int, 
   userId = map[userIdColumn] as int, 
   text = map[textColumn] as String, 
-  isSynchedWithCloud = (map[isSynchedWithCloudColumn] as int) == 1 ? true : false;
+  isSynchedWithCloud = (map[isSyncedWithCloudColumn] as int) == 1 ? true : false;
 
   @override
   String toString() => 'Person, ID = $id, user_id = $userId, isSynchedWithCloud = $isSynchedWithCloud, text = $text';
@@ -255,7 +261,7 @@ const idColumn = 'id';
 const emailColumn = 'email';
 const userIdColumn = 'user_id';
 const textColumn = 'text';
-const isSynchedWithCloudColumn = 'isSynchedWithCloudColumn';
+const isSyncedWithCloudColumn = 'is_synced_with_cloud';
 const createUserTable = '''CREATE TABLE IF NOT EXISTS "user" (
 	                               "id"	INTEGER NOT NULL,
 	                              "email"	TEXT NOT NULL UNIQUE,
