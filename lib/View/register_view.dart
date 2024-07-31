@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mynotes/Constants/routes.dart';
 import 'package:mynotes/Services/auth/auth_exceptions.dart';
 import 'package:mynotes/Services/auth/auth_service.dart';
-import 'package:mynotes/Utilities/show_error_dialog.dart';
+import 'package:mynotes/Utilities/dialogs/error_dialog.dart';
 
 
 class RegisterView extends StatefulWidget {
