@@ -6,7 +6,7 @@ import 'package:mynotes/View/Verify_email_view.dart';
 import 'package:mynotes/View/notes/create_update_note_view.dart.dart';
 import 'package:mynotes/View/notes/notes_view.dart';
 import 'package:mynotes/View/register_view.dart';
-
+ 
 void main(){
   WidgetsFlutterBinding.ensureInitialized();
   runApp(MaterialApp(
