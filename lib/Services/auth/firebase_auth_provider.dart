@@ -75,7 +75,7 @@ class FirebaseAuthProvider implements AuthProvider{
                  else{
                   throw GenericAuthExceptions();
                  } 
-              }catch(e){
+              }catch(_){
                 throw GenericAuthExceptions();
               }
   }
