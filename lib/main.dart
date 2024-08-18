@@ -10,6 +10,7 @@ import 'package:mynotes/View/Verify_email_view.dart';
 import 'package:mynotes/View/notes/create_update_note_view.dart.dart';
 import 'package:mynotes/View/notes/notes_view.dart';
 import 'package:mynotes/View/register_view.dart';
+import 'package:mynotes/helpers/loading/loading_screen.dart';
 
 
 void main() {
@@ -38,7 +39,15 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     context.read<AuthBloc>().add(const AuthEventInitialize());
-    return BlocBuilder<AuthBloc, AuthState>(builder: (context,state){
+    return BlocConsumer<AuthBloc, AuthState>(
+      listener:(context, state){
+        if(state.isLoading){
+          LoadingScreen().show(context:context,text: state.loadingText ?? 'Please eait a moment',);
+        }else{
+          LoadingScreen().hide();
+        }
+    },
+    builder: (context,state){
       if(state is AuthStateLoggedIn){
         return const NotesView();
       }else if(state is AuthStateNeedsVerification){
