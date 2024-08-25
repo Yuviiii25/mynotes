@@ -14,7 +14,7 @@ import 'package:mynotes/View/register_view.dart';
 import 'package:mynotes/helpers/loading/loading_screen.dart';
 
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MaterialApp(
@@ -43,7 +43,7 @@ class HomePage extends StatelessWidget {
     return BlocConsumer<AuthBloc, AuthState>(
       listener:(context, state){
         if(state.isLoading){
-          LoadingScreen().show(context:context,text: state.loadingText ?? 'Please eait a moment',);
+          LoadingScreen().show(context:context,text: state.loadingText ?? 'Please wait a moment',);
         }else{
           LoadingScreen().hide();
         }
@@ -59,7 +59,8 @@ class HomePage extends StatelessWidget {
         return const RegisterView();
       }else if(state is AuthStateForgotPassword){
         return const ForgotPasswordView();
-      }else{
+      }
+      else{
         return const Scaffold(
           body: CircularProgressIndicator(),
         );

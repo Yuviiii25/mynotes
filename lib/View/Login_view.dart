@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:mynotes/Services/auth/auth_exceptions.dart';
@@ -60,6 +61,7 @@ class _LoginViewState extends State<LoginView> {
                 controller: _email,
                 enableSuggestions: false,
                 autocorrect: false,
+                autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
                   hintText: 'Enter Your email here',
@@ -94,7 +96,7 @@ class _LoginViewState extends State<LoginView> {
                   context.read<AuthBloc>().add(const AuthEventShouldRegister());
                 },
                 child: const Text('Not Registered Yet? Register Here!'),
-              )
+              ),
             ],
           ),
         ),

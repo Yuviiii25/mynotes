@@ -56,6 +56,7 @@ class _RegisterViewState extends State<RegisterView> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              const Text('Please complete you registration in order to interact with you notes!'),
               TextField(
                 controller: _email,
                 enableSuggestions: false,
@@ -63,7 +64,7 @@ class _RegisterViewState extends State<RegisterView> {
                 autofocus: true,
                 keyboardType: TextInputType.emailAddress,
                 decoration: const InputDecoration(
-                  hintText: 'Enter Your email here',
+                  hintText: 'Enter Your email',
                 ),
               ),
               TextField(
